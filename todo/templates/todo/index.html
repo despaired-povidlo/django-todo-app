@@ -1,0 +1,28 @@
+{% extends 'todo/base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo App</title>
+</head>
+<body>
+{% block content %}
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+
+                 <h1>Simply Your Todos!</h1>
+            <h4>Life is fun. But life is also busy. There's a million different things you could be doing. But what matters is <u>what</u> you do. I created this <b><i>Todo App</i></b> to help you make sense of all of your opportunities and live that life that matters most to you.</h4>
+            <h3><strong>Your new organized life awaits.</strong></h3>
+        <a role="button" class="btn btn-primary btn-lg" href="{% url 'signup_user' %}">Start</a>
+        </div>
+    </div>
+
+{% endblock content %}
+</body>
+</html>
