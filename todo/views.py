@@ -34,12 +34,17 @@ def signup_user(request):
                 # Handling username that alrerady been taken exception
                 context = {'form': UserCreationForm(), 'error': 'This username has already been taken.'}
                 return render(request, 'todo/signup_user.html', context)
+
         elif request.POST['password1'] != request.POST['password2'] and request.POST['password1'] and request.POST['password2']:
-            # Handling password not matching exception
-            context = {'form': UserCreationForm(), 'error': 'Password did not match. Please try again'}
+            # Not letting user enter two different passwords
+            context = {'form': UserCreationForm(),
+                       'error': 'Password did not match. Please try again'}
             return render(request, 'todo/signup_user.html', context)
+
         else:
-            context = {'form': UserCreationForm(), 'error': 'Something went wrong. Maybe You did not enter password?'}
+            # Handling any other errors
+            context = {'form': UserCreationForm(),
+                       'error': 'Something went wrong. Maybe You did not enter password?'}
             return render(request, 'todo/signup_user.html', context)
 
 
@@ -67,6 +72,7 @@ def login_user(request):
 
 @login_required
 def current(request):
+    # Searching todos that are not completed and made by the same user, while ordering them newest to oldest
     todos = Todo.objects.filter(user=request.user, date_completed__isnull=True).order_by('-date_completed')
     context = {'todos': todos}
     return render(request, 'todo/current.html', context)
@@ -79,6 +85,7 @@ def create_todo(request):
         return render(request, 'todo/create_todo.html', context)
     else:
         try:
+            # Saving new todo in try block to prevent user from "bad" data
             form = TodoForm(request.POST)
             new_todo = form.save(commit=False)
 
@@ -101,7 +108,7 @@ def todo_view(request, todo_pk):
         return render(request, 'todo/todo_view.html', context)
     else:
         try:
-            form = TodoForm(request.POST, instance=todo)  # don't need to create a new object, so we need instance attr
+            form = TodoForm(request.POST, instance=todo)
             form.save()
             return redirect('current')
 

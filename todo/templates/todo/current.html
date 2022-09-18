@@ -18,6 +18,7 @@
     </div>
     <div class="row justify-content-center mt-5">
         <div class="col-md-10">
+        <!-- Loading all user's todos if ones exist -->
         {% if todos %}
             <div class="list-group">
                 {% for todo in todos %}
@@ -30,6 +31,7 @@
                     </a>
                 {% endfor %}
             </div>
+        <!-- Special case for 0 todos -->
         {% else %}
             <div class="text-center">
                 <h2>Looks like you don't have any todos!</h2>
@@ -42,7 +44,5 @@
         </div>
     </div>
 {% endblock content %}
-{#        </div>#}
-{#    </div>#}
 </body>
 </html>
