@@ -22,9 +22,9 @@
 
   <div class=" collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ms-auto ">
-      <li class="nav-item">
-        <a class="nav-link mx-2 active" aria-current="page" href="{% url 'index' %}">Home</a>
-      </li>
+        <li class="nav-item">
+            <a class="nav-link mx-2 active" aria-current="page" href="{% url 'index' %}">Home</a>
+        </li>
         <li class="nav-item">
     <a class="nav-link mx-2" href="{% url 'create_todo' %}">Create</a>
         </li>
@@ -33,6 +33,9 @@
         </li>
         <li class="nav-item">
     <a class="nav-link mx-2" href="{% url 'completed' %}">Completed</a>
+        </li>
+        <li class="nav-item">
+    <a class="nav-link mx-2" href="{% url 'about' %}">About</a>
         </li>
     <form action="{% url 'logout_user' %}" method="POST">
         {% csrf_token %}
@@ -50,6 +53,9 @@
 {#            <button class="btn btn-primary">#}
 {#                <a href="{% url 'login_user' %}" style="color: #ffffff; text-decoration: none;">Login</a>#}
 {#            </button>#}
+                <li class="nav-item">
+                    <a class="nav-link mx-2" href="{% url 'about' %}">About</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="{% url 'signup_user' %}">Sign up</a>
                 </li>

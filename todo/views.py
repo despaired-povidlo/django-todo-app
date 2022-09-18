@@ -14,6 +14,10 @@ def index(request):
     return render(request, 'todo/index.html')
 
 
+def about(request):
+    return render(request, 'todo/about.html')
+
+
 def signup_user(request):
     if request.method == 'GET':
         context = {'form': UserCreationForm()}
