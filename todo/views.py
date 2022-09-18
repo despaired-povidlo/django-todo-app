@@ -19,7 +19,7 @@ def signup_user(request):
         context = {'form': UserCreationForm()}
         return render(request, 'todo/signup_user.html', context)
     else:
-        if request.POST['password1'] == request.POST['password2']:
+        if request.POST['password1'] == request.POST['password2'] and request.POST['password1'] and request.POST['password2']:
             try:
                 # Saving user data and redirecting him to current page
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
@@ -30,9 +30,12 @@ def signup_user(request):
                 # Handling username that alrerady been taken exception
                 context = {'form': UserCreationForm(), 'error': 'This username has already been taken.'}
                 return render(request, 'todo/signup_user.html', context)
-        else:
+        elif request.POST['password1'] != request.POST['password2'] and request.POST['password1'] and request.POST['password2']:
             # Handling password not matching exception
-            context = {'form': UserCreationForm(), 'error': 'Password did not match'}
+            context = {'form': UserCreationForm(), 'error': 'Password did not match. Please try again'}
+            return render(request, 'todo/signup_user.html', context)
+        else:
+            context = {'form': UserCreationForm(), 'error': 'Something went wrong. Maybe You did not enter password?'}
             return render(request, 'todo/signup_user.html', context)
 
 
@@ -100,7 +103,6 @@ def todo_view(request, todo_pk):
 
         except ValueError:
             context = {'todo': todo,
-                       'form': form,
                        'error': 'Something went wrong... Try again'}
             return render(request, 'todo/todo_view.html', context)
 
