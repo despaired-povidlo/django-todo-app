@@ -7,19 +7,33 @@
 </head>
 <body>
 {% block content %}
-    <h1>Completed todos</h1>
-    <ul>
-    {% for todo in todos %}
-    <li>
-        <a href="{% url 'todo_view' todo.id %}">
-        {% if todo.important %}<b>{% endif %}{{ todo.title }}
-        {{ todo.date_completed|date:"M j Y H:i" }}
-        {% if todo.important %}</b>{% endif %}
-        {% if todo.memo %} - {{ todo.memo }}{% endif %}
-        </a>
-    </li>
-    {% endfor %}
-    </ul>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+            {% if todos %}
+                <h1>{{ todos.count }} Completed Todo{{ todos.count|pluralize }}</h1>
+            {% else %}
+                <h1>Completed Todos</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if todos %}
+            <div class="list-group">
+                {% for todo in todos %}
+                    <a href="{% url 'todo_view' todo.id %}" class="list-group-item list-group-item-action
+                    {% if todo.important %} list-group-item-danger{% endif %}">
+                    <b>{{ todo.title }}</b>
+                    {% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}
+                    </a>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any completed todos!</h2>
+            </div>
+        {% endif %}
+        </div>
 {% endblock content %}
 </body>
 </html>

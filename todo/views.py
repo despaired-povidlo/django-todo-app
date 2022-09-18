@@ -63,7 +63,7 @@ def login_user(request):
 
 @login_required
 def current(request):
-    todos = Todo.objects.filter(user=request.user, date_completed__isnull=True)
+    todos = Todo.objects.filter(user=request.user, date_completed__isnull=True).order_by('-date_completed')
     context = {'todos': todos}
     return render(request, 'todo/current.html', context)
 

@@ -20,13 +20,12 @@
             <h4>Life is fun. But life is also busy. There's a million different things you could be doing. But what matters is <u>what</u> you do. I created this <b><i>Todo App</i></b> to help you make sense of all of your opportunities and live that life that matters most to you.</h4>
             <h3><strong>Your new organized life awaits.</strong></h3>
     {% if user.is_authenticated == False  %}
-        <a role="button" class="btn btn-primary btn-lg" href="{% url 'signup_user' %}">Start!</a>
+        <a role="button" class="btn btn-success btn-lg" href="{% url 'signup_user' %}">Start!</a>
     {% else %}
-        <a role="button" class="btn btn-primary btn-lg" href="{% url 'current' %}">Start!</a>
+        <a role="button" class="btn btn-success btn-lg" href="{% url 'current' %}">Start!</a>
     {% endif %}
         </div>
     </div>
-
 {% endblock content %}
 </body>
 </html>

@@ -22,7 +22,9 @@
             <div class="list-group">
                 {% for todo in todos %}
                     <a href="{% url 'todo_view' todo.id %}" class="list-group-item list-group-item-action
-                    {% if todo.important %} list-group-item-danger{% endif %}">
+                    {% if todo.important %} list-group-item-danger
+                    {% else %} list-group-item-info
+                    {% endif %}">
                     <b>{{ todo.title }}</b>
                     {% if todo.memo %} - {{ todo.memo|truncatechars:30 }}{% endif %}
                     </a>
@@ -31,10 +33,12 @@
         {% else %}
             <div class="text-center">
                 <h2>Looks like you don't have any todos!</h2>
-            <br>
-            <a role="button" class="btn btn-primary" href="{% url 'create_todo' %}">New Todo</a>
             </div>
         {% endif %}
+            <br>
+            <div class="text-center">
+            <a role="button" class="btn btn-primary" href="{% url 'create_todo' %}">New Todo</a>
+            </div>
         </div>
     </div>
 {% endblock content %}
